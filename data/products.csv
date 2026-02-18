@@ -1,0 +1,26 @@
+product_id,product_name,category,sub_category,unit_price,cost_price,supplier,in_stock
+PROD0001,Laptop,Electronics,Laptop,975.0,573.69,Supplier_8,True
+PROD0002,Smartphone,Electronics,Smartphone,977.37,109.42,Supplier_1,True
+PROD0003,Tablet,Electronics,Tablet,463.5,445.9,Supplier_2,True
+PROD0004,Headphones,Electronics,Headphones,1332.02,126.42,Supplier_8,True
+PROD0005,Smartwatch,Electronics,Smartwatch,1009.02,670.11,Supplier_9,True
+PROD0006,T-Shirt,Clothing,T-Shirt,885.14,655.31,Supplier_7,True
+PROD0007,Jeans,Clothing,Jeans,1252.2,556.01,Supplier_5,True
+PROD0008,Jacket,Clothing,Jacket,1038.52,199.46,Supplier_8,True
+PROD0009,Dress,Clothing,Dress,1284.62,93.92,Supplier_6,False
+PROD0010,Sneakers,Clothing,Sneakers,1353.53,582.12,Supplier_1,True
+PROD0011,Sofa,Home,Sofa,421.06,871.55,Supplier_8,True
+PROD0012,Lamp,Home,Lamp,997.53,579.33,Supplier_10,True
+PROD0013,Blender,Home,Blender,85.36,303.49,Supplier_3,True
+PROD0014,Coffee Maker,Home,Coffee Maker,112.23,689.82,Supplier_4,True
+PROD0015,Vacuum,Home,Vacuum,1221.45,213.53,Supplier_3,True
+PROD0016,Fiction Novel,Books,Fiction Novel,423.14,885.71,Supplier_3,False
+PROD0017,Self-Help,Books,Self-Help,383.47,161.17,Supplier_1,True
+PROD0018,Textbook,Books,Textbook,32.14,712.04,Supplier_4,True
+PROD0019,Biography,Books,Biography,33.51,242.5,Supplier_3,True
+PROD0020,Cookbook,Books,Cookbook,793.87,672.37,Supplier_8,True
+PROD0021,Yoga Mat,Sports,Yoga Mat,1169.25,464.35,Supplier_2,True
+PROD0022,Dumbbells,Sports,Dumbbells,760.72,851.15,Supplier_1,False
+PROD0023,Running Shoes,Sports,Running Shoes,459.43,580.79,Supplier_1,True
+PROD0024,Cycling Helmet,Sports,Cycling Helmet,1497.89,763.33,Supplier_7,True
+PROD0025,Tennis Racket,Sports,Tennis Racket,740.5,819.18,Supplier_2,True

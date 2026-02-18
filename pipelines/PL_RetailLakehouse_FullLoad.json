@@ -1,0 +1,131 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "pipeline_name": "PL_RetailLakehouse_FullLoad",
+  "description": "Orchestrates full Bronze → Silver → Gold pipeline for Retail Lakehouse",
+  "properties": {
+    "activities": [
+      {
+        "name": "Copy_Customers_To_Bronze",
+        "type": "Copy",
+        "description": "Copy customers.csv from Files zone to Bronze Delta table",
+        "dependsOn": [],
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": false,
+              "enablePartitionDiscovery": false
+            },
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings",
+              "firstRowAsHeader": true
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema"
+          },
+          "enableStaging": false
+        },
+        "inputs": [{"referenceName": "DS_Raw_Customers_CSV", "type": "DatasetReference"}],
+        "outputs": [{"referenceName": "DS_Bronze_Customers_Delta", "type": "DatasetReference"}]
+      },
+      {
+        "name": "Copy_Products_To_Bronze",
+        "type": "Copy",
+        "description": "Copy products.csv from Files zone to Bronze Delta table",
+        "dependsOn": [],
+        "typeProperties": {
+          "source": {"type": "DelimitedTextSource", "storeSettings": {"type": "LakehouseReadSettings"}},
+          "sink": {"type": "LakehouseTableSink", "tableActionOption": "OverwriteSchema"}
+        },
+        "inputs": [{"referenceName": "DS_Raw_Products_CSV"}],
+        "outputs": [{"referenceName": "DS_Bronze_Products_Delta"}]
+      },
+      {
+        "name": "Copy_Stores_To_Bronze",
+        "type": "Copy",
+        "description": "Copy stores.csv from Files zone to Bronze Delta table",
+        "dependsOn": [],
+        "typeProperties": {
+          "source": {"type": "DelimitedTextSource"},
+          "sink": {"type": "LakehouseTableSink", "tableActionOption": "OverwriteSchema"}
+        }
+      },
+      {
+        "name": "Copy_Transactions_To_Bronze",
+        "type": "Copy",
+        "description": "Copy transactions.csv (500K+ rows) from Files zone to Bronze Delta table",
+        "dependsOn": [],
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "storeSettings": {"type": "LakehouseReadSettings", "recursive": false},
+            "formatSettings": {"type": "DelimitedTextReadSettings", "firstRowAsHeader": true}
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "writeBatchSize": 10000
+          },
+          "parallelCopies": 4,
+          "enableStaging": false
+        }
+      },
+      {
+        "name": "NB_Bronze_To_Silver",
+        "type": "SparkJobDefinition",
+        "description": "Run PySpark notebook: Silver layer transformations",
+        "dependsOn": [
+          {"activity": "Copy_Customers_To_Bronze",     "dependencyConditions": ["Succeeded"]},
+          {"activity": "Copy_Products_To_Bronze",      "dependencyConditions": ["Succeeded"]},
+          {"activity": "Copy_Stores_To_Bronze",        "dependencyConditions": ["Succeeded"]},
+          {"activity": "Copy_Transactions_To_Bronze",  "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "sparkJobDefinition": {
+            "referenceName": "NB_02_Silver_Transformation",
+            "type": "SparkJobDefinitionReference"
+          },
+          "className": "02_silver_transformation",
+          "args": []
+        }
+      },
+      {
+        "name": "NB_Silver_To_Gold",
+        "type": "SparkJobDefinition",
+        "description": "Run PySpark notebook: Gold star schema + SCD Type-2",
+        "dependsOn": [
+          {"activity": "NB_Bronze_To_Silver", "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "sparkJobDefinition": {
+            "referenceName": "NB_03_Gold_Star_Schema",
+            "type": "SparkJobDefinitionReference"
+          }
+        }
+      },
+      {
+        "name": "Refresh_DirectLake_Model",
+        "type": "WebActivity",
+        "description": "Trigger Power BI semantic model refresh via REST API",
+        "dependsOn": [
+          {"activity": "NB_Silver_To_Gold", "dependencyConditions": ["Succeeded"]}
+        ],
+        "typeProperties": {
+          "url": "https://api.powerbi.com/v1.0/myorg/groups/{workspace_id}/datasets/{dataset_id}/refreshes",
+          "method": "POST",
+          "headers": {"Content-Type": "application/json"},
+          "body": {"notifyOption": "MailOnFailure"},
+          "authentication": {"type": "MSI", "resource": "https://analysis.windows.net/powerbi/api"}
+        }
+      }
+    ],
+    "parameters": {
+      "pipeline_run_date": {"type": "string", "defaultValue": "@utcNow('yyyy-MM-dd')"},
+      "load_mode": {"type": "string", "defaultValue": "FULL", "description": "FULL or INCREMENTAL"}
+    },
+    "annotations": ["RetailLakehouse", "Bronze", "Silver", "Gold", "MedallionArchitecture"]
+  }
+}

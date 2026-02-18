@@ -1,0 +1,41 @@
+customer_id,first_name,last_name,email,city,segment,signup_date,is_active,update_date
+CUST0127,Sophia,Davis,user127@email.com,Mumbai,Standard,2022-03-12,True,2024-01-15
+CUST0068,Olivia,Kumar,user68@email.com,Toronto,Standard,2022-12-20,True,2024-01-15
+CUST0051,Kiran,Kumar,user51@email.com,Dubai,Budget,2021-09-29,False,2024-01-15
+CUST0048,Priya,Davis,user48@email.com,Chennai,Standard,2021-03-12,True,2024-01-15
+CUST0027,Mia,Jones,user27@email.com,Mumbai,Budget,2021-04-25,True,2024-01-15
+CUST0189,Divya,Sharma,user189@email.com,Mumbai,Premium,2021-01-09,True,2024-01-15
+CUST0028,Divya,Kumar,user28@email.com,New York,Budget,2022-08-04,True,2024-01-15
+CUST0031,Rohan,Davis,user31@email.com,Mumbai,Premium,2021-11-16,False,2024-01-15
+CUST0089,Sneha,Smith,user89@email.com,Delhi,Standard,2022-12-14,False,2024-01-15
+CUST0069,Liam,Sharma,user69@email.com,Chennai,Budget,2021-07-24,False,2024-01-15
+CUST0148,Noah,Patel,user148@email.com,New York,Premium,2021-11-08,False,2024-01-15
+CUST0086,Aarav,Sharma,user86@email.com,Toronto,Standard,2022-09-18,True,2024-01-15
+CUST0159,Mia,Brown,user159@email.com,Hyderabad,Premium,2021-07-28,True,2024-01-15
+CUST0162,Divya,Davis,user162@email.com,Toronto,Standard,2022-02-22,True,2024-01-15
+CUST0168,Divya,Mehta,user168@email.com,London,Budget,2022-11-07,False,2024-01-15
+CUST0166,Liam,Kumar,user166@email.com,Chennai,Budget,2021-05-20,True,2024-01-15
+CUST0160,Isabella,Singh,user160@email.com,Hyderabad,Budget,2022-12-17,False,2024-01-15
+CUST0034,Mason,Kumar,user34@email.com,Sydney,Premium,2022-12-26,True,2024-01-15
+CUST0190,Mia,Brown,user190@email.com,Bangalore,Premium,2022-09-14,True,2024-01-15
+CUST0021,Olivia,Wilson,user21@email.com,Mumbai,Budget,2022-01-26,False,2024-01-15
+CUST0175,Vikram,Smith,user175@email.com,New York,Premium,2022-04-26,True,2024-01-15
+CUST0122,Rohan,Jones,user122@email.com,Delhi,Standard,2021-10-14,True,2024-01-15
+CUST0153,Kiran,Singh,user153@email.com,Chennai,Standard,2022-10-13,False,2024-01-15
+CUST0194,Rohan,Singh,user194@email.com,Chennai,Budget,2022-06-28,True,2024-01-15
+CUST0178,Mia,Patel,user178@email.com,Mumbai,Standard,2022-12-02,True,2024-01-15
+CUST0098,Olivia,Sharma,user98@email.com,Chennai,Premium,2022-02-03,True,2024-01-15
+CUST0184,Sophia,Wilson,user184@email.com,London,Standard,2022-04-18,True,2024-01-15
+CUST0169,Vikram,Brown,user169@email.com,Bangalore,Standard,2021-12-20,True,2024-01-15
+CUST0013,Rahul,Wilson,user13@email.com,Dubai,Budget,2021-09-08,True,2024-01-15
+CUST0155,Sneha,Singh,user155@email.com,Dubai,Budget,2022-12-12,False,2024-01-15
+CUST0018,Meera,Davis,user18@email.com,Dubai,Premium,2022-08-22,False,2024-01-15
+CUST0061,Kiran,Singh,user61@email.com,Hyderabad,Budget,2022-12-24,False,2024-01-15
+CUST0180,Noah,Singh,user180@email.com,Sydney,Premium,2021-02-17,True,2024-01-15
+CUST0075,Mia,Davis,user75@email.com,Hyderabad,Standard,2022-08-14,True,2024-01-15
+CUST0017,Sophia,Smith,user17@email.com,Hyderabad,Budget,2021-09-29,True,2024-01-15
+CUST0126,Liam,Kumar,user126@email.com,London,Standard,2022-08-19,True,2024-01-15
+CUST0107,Sophia,Sharma,user107@email.com,London,Premium,2021-12-25,True,2024-01-15
+CUST0082,Olivia,Wilson,user82@email.com,New York,Budget,2021-11-26,False,2024-01-15
+CUST0146,Sneha,Davis,user146@email.com,Chennai,Premium,2021-06-02,True,2024-01-15
+CUST0033,Meera,Patel,user33@email.com,Hyderabad,Premium,2022-08-26,True,2024-01-15

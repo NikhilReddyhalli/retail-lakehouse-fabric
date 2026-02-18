@@ -1,0 +1,9 @@
+store_id,store_name,store_type,city,region,open_date
+STORE001,Downtown Store,Physical,London,Central,2015-10-31
+STORE002,Mall Store,Physical,Delhi,South,2016-07-17
+STORE003,Airport Store,Physical,Toronto,Central,2018-01-28
+STORE004,Online Store,Online,London,West,2018-05-08
+STORE005,Suburb Store,Physical,Dubai,East,2017-07-18
+STORE006,Central Store,Physical,Dubai,Central,2017-05-31
+STORE007,Westside Store,Physical,Delhi,North,2019-10-13
+STORE008,Eastside Store,Physical,Dubai,South,2017-05-30
