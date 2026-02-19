@@ -130,7 +130,7 @@ Old row: is_current=False, effective_end_date = today
 New row: is_current=True, effective_start_date = today, effective_end_date = 9999-12-31
 ```
 
----
+
 
 ## 🚀 How I Built This
 
