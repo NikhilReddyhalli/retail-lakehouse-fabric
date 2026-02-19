@@ -132,42 +132,31 @@ New row: is_current=True, effective_start_date = today, effective_end_date = 999
 
 ---
 
-## 🚀 Setup & Deployment
+## 🚀 How I Built This
 
-### Prerequisites
-- Microsoft Fabric workspace with Lakehouse enabled
-- Fabric capacity (F2 or above recommended)
+### Environment
+- Microsoft Fabric workspace with Trial capacity
+- Lakehouse named `RetailLakehouse` with OneLake storage
 
-### Step 1 — Create the Lakehouse
-1. Open your Fabric workspace
-2. **New → Lakehouse** → Name it `RetailLakehouse`
+### Step 1 — Data Ingestion (Bronze Layer)
+- Generated synthetic retail dataset: 200 customers, 25 products, 8 stores, 5,000 transactions
+- Uploaded CSVs to Lakehouse `Files/raw_data/` section
+- Ran `01_bronze_ingestion.ipynb` — ingested all 4 tables as Delta format with metadata columns
 
-### Step 2 — Upload Sample Data
-1. In the Lakehouse, click **Files** → **Upload**
-2. Create folder `raw_data/`
-3. Upload all 5 CSV files from the `data/` folder
+### Step 2 — Transformation (Silver Layer)
+- Ran `02_silver_transformation.ipynb`
+- Applied PySpark transformations: null handling, deduplication, type casting, date enrichment
+- Derived new columns: `gross_margin_pct`, `price_tier`, `email_domain`, `is_weekend`
 
-### Step 3 — Import Notebooks
-1. **New → Import Notebook**
-2. Import all 3 `.ipynb` files from `notebooks/`
-3. In each notebook, update `LAKEHOUSE_NAME` and `your_workspace` in Cell 1
-4. Attach notebooks to your `RetailLakehouse`
+### Step 3 — Star Schema (Gold Layer)
+- Ran `03_gold_star_schema.ipynb`
+- Built `fact_sales` joined with 4 dimensions
+- Implemented SCD Type-2 MERGE logic for `dim_customer` tracking city and segment changes
 
-### Step 4 — Run Notebooks in Order
-```
-01_bronze_ingestion.ipynb  →  02_silver_transformation.ipynb  →  03_gold_star_schema.ipynb
-```
-
-### Step 5 — Create Fabric Pipeline (Optional)
-1. **New → Data Pipeline** → Name it `PL_RetailLakehouse_FullLoad`
-2. Use the JSON in `pipelines/` as reference for the pipeline structure
-3. Set up scheduled runs (e.g. daily at 2 AM)
-
-### Step 6 — DirectLake Semantic Model
-1. In your Lakehouse, click **New semantic model**
-2. Select all Gold tables: `fact_sales`, `dim_customer`, `dim_product`, `dim_store`, `dim_date`
-3. Define relationships in the model view
-4. Connect Power BI Desktop using **DirectLake** mode (no import!)
+### Step 4 — Power BI Dashboard
+- Created DirectLake semantic model on all 5 Gold tables
+- Defined 4 relationships (fact → dimensions)
+- Built dashboard with KPI cards, revenue trends, category analysis, and customer rankings
 
 ---
 
