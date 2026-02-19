@@ -5,6 +5,10 @@
 ![Delta Lake](https://img.shields.io/badge/Delta_Lake-003366?style=for-the-badge&logo=delta&logoColor=white)
 ![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
 
+## 📊 Dashboard Preview
+![Retail Lakehouse Dashboard](dashboard.png)
+
+---
 A production-grade **Medallion Architecture** data lakehouse built entirely on **Microsoft Fabric**, ingesting 500K+ retail transactions through Bronze → Silver → Gold layers with SCD Type-2 customer history and sub-second DirectLake reporting.
 
 ---
