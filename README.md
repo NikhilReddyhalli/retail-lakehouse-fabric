@@ -54,25 +54,25 @@ flowchart LR
 ---
 
 ## 📁 Project Structure
-```
+```text
 retail-lakehouse/
 ├── README.md
 ├── dashboard.png
 ├── data/
-│   ├── customers.csv              ← 200 customers
-│   ├── products.csv               ← 25 products across 5 categories
-│   ├── stores.csv                 ← 8 store locations
-│   ├── transactions.csv           ← 5,000 transactions (scale to 500K+)
-│   └── customers_updated.csv      ← 40 records for SCD Type-2 demo
+│   ├── customers.csv
+│   ├── products.csv
+│   ├── stores.csv
+│   ├── transactions.csv
+│   └── customers_updated.csv
 ├── notebooks/
-│   ├── 01_bronze_ingestion.ipynb  ← Raw CSV → Bronze Delta
-│   ├── 02_silver_transformation.ipynb ← Cleansing & enrichment
-│   └── 03_gold_star_schema.ipynb  ← Star schema + SCD Type-2
+│   ├── 01_bronze_ingestion.ipynb
+│   ├── 02_silver_transformation.ipynb
+│   └── 03_gold_star_schema.ipynb
 ├── pipelines/
-│   └── PL_RetailLakehouse_FullLoad.json ← Fabric Pipeline definition
+│   └── PL_RetailLakehouse_FullLoad.json
 └── sql/
-    └── gold_ddl_and_queries.sql   ← DDL + analytical queries
-```
+    └── gold_ddl_and_queries.sql
+
 ```
 
 ---
