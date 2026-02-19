@@ -14,33 +14,41 @@ A production-grade **Medallion Architecture** data lakehouse built entirely on *
 ---
 
 ## 🏗️ Architecture Overview
+```mermaid
+flowchart LR
+    subgraph Sources["📁 Source Files"]
+        A[customers.csv]
+        B[products.csv]
+        C[stores.csv]
+        D[transactions.csv]
+    end
 
+    subgraph Medallion["🏅 Medallion Architecture - Microsoft Fabric"]
+        direction LR
+        subgraph Bronze["🥉 Bronze"]
+            E[Raw Delta Tables]
+        end
+        subgraph Silver["🥈 Silver"]
+            F[Cleaned & Enriched]
+        end
+        subgraph Gold["🥇 Gold"]
+            G[fact_sales]
+            H[dim_customer SCD2]
+            I[dim_product]
+            J[dim_store]
+            K[dim_date]
+        end
+        Bronze --> Silver --> Gold
+    end
+
+    subgraph Serving["📊 Serving Layer"]
+        L[DirectLake Semantic Model]
+        M[Power BI Dashboard]
+    end
+
+    Sources --> Bronze
+    Gold --> L --> M
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                     Microsoft Fabric Workspace                       │
-│                                                                     │
-│  ┌──────────┐    ┌──────────────────────────────────────────────┐   │
-│  │  Source  │    │           Medallion Architecture             │   │
-│  │  CSVs    │───▶│                                              │   │
-│  │          │    │  ┌─────────┐  ┌─────────┐  ┌─────────────┐ │   │
-│  │ customers│    │  │ 🥉 BRONZE│  │ 🥈 SILVER│  │  🥇 GOLD    │ │   │
-│  │ products │    │  │         │  │         │  │             │ │   │
-│  │ stores   │    │  │ Raw     │─▶│ Cleaned │─▶│ Star Schema │ │   │
-│  │ txns     │    │  │ Delta   │  │ Delta   │  │ Delta       │ │   │
-│  └──────────┘    │  └─────────┘  └─────────┘  └──────┬──────┘ │   │
-│                  └─────────────────────────────────────│────────┘   │
-│                                                        │            │
-│  ┌─────────────────────────────────────────────────────▼────────┐   │
-│  │              DirectLake Semantic Model                        │   │
-│  │    fact_sales ◄── dim_customer (SCD2) / dim_product          │   │
-│  │               ◄── dim_store  /  dim_date                     │   │
-│  └───────────────────────────┬───────────────────────────────────┘  │
-│                              │                                      │
-│                    ┌─────────▼──────────┐                           │
-│                    │  Power BI Reports  │                           │
-│                    │  Sub-second latency│                           │
-│                    └────────────────────┘                           │
-└─────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
